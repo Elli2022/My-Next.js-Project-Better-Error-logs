@@ -7,6 +7,7 @@ export default function SignIn() {
     password: "",
   });
   const [error, setError] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Ny state för att spåra inloggning
 
   const handleChange = (e: any) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -30,7 +31,9 @@ export default function SignIn() {
       if (!response.ok) {
         setError(data.error || "Ett fel inträffade vid inloggning.");
       } else {
-        // Hantera inloggad användare här, t.ex. spara token, navigera användaren etc.
+        // Sparar token i localStorage och uppdatera inloggningsstatus
+        localStorage.setItem("token", data.token);
+        setIsLoggedIn(true);
         console.log("Inloggad, token:", data.token);
       }
     } catch (error) {
@@ -42,6 +45,8 @@ export default function SignIn() {
     <div>
       <h1>Logga in</h1>
       {error && <p className="error">{error}</p>}
+      {isLoggedIn && <p>Du är nu inloggad!</p>}{" "}
+      {/* Nytt meddelande om inloggad */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
