@@ -47,7 +47,7 @@ export default function Register() {
         <div>
           <h1>Välkommen, {formData.username}!</h1>
           <p>Vill du logga in?</p>
-          {/* <Link href="/signin">Sign In</Link> */}
+          <Link href="/signin">Sign In</Link>
         </div>
       ) : (
         <>
